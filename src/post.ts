@@ -10,6 +10,7 @@ const saveDockerImages = async (): Promise<void> => {
   } else {
     await execBashCommand(
       'docker image list --format "{{ .Repository }}:{{ .Tag }}" | ' +
+        'grep "redis" | ' +
         '2>&1 xargs --delimiter="\n" --no-run-if-empty --verbose --exit ' +
         `docker save --output ${DOCKER_IMAGES_PATH}`
     );
